@@ -3,7 +3,7 @@ resource "hcloud_volume" "data" {
    size = var.volume_size
    automount = "true"
    format = "ext4"
-   # delete_protection = "true"
+   delete_protection = "true"
    server_id = hcloud_server.server.id
 }
 
