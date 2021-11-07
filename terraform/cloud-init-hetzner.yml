@@ -1,0 +1,16 @@
+#cloud-config
+
+write_files:
+- owner: root:root
+  path: /etc/netplan/60-floating-ip.yaml
+  content: |
+    network:
+      version: 2
+      renderer: networkd
+      ethernets:
+        eth0:
+          addresses:
+          - ${floating_ip}/32
+
+runcmd:
+- [ netplan, apply ]

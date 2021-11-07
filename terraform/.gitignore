@@ -1,0 +1,4 @@
+*.lock.hcl
+variables.auto.tfvars
+*.tfstate*
+.terraform

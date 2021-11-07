@@ -1,0 +1,5 @@
+---
+- name: generic
+  hosts: localhost
+  roles:
+    - role: generic
