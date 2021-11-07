@@ -1,0 +1,7 @@
+all:
+  hosts:
+%{ for host_key, host_ip in hosts }
+    ${host_key}:
+      ansible_host: ${host_ip}
+      ansible_user: root
+%{~ endfor ~}

@@ -1,2 +1,3 @@
 ansible.log
 secrets.yml.enc
+inventory.yml

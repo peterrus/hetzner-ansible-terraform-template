@@ -33,10 +33,16 @@ terraform plan
 terraform apply
 ```
 
-Once the plan is executed you should be able to log in to your new server using:
+Once the plan is executed you should be able to log in to your new server using (This connects via the floating ip):
 ```
 ssh -i ~/.ssh/<your_ssh_key> root@$(terraform output -raw server_ip)
 ```
 
 ## Ansible
 TODO
+
+# Destruction
+
+- Remove the delete protection from the data volume through the Hetzner Cloud dashboard or `hcloud` cli utility (You will lose all data on this volume!).
+- Optionally remove the delet protection from the floating ip so it also gets destroyed in the next step.
+- `cd terraform; terraform destroy`
