@@ -3,6 +3,7 @@
 ## Terraform
 
 ```
+cd terraform
 terraform init
 ```
 
@@ -27,6 +28,7 @@ You can find more information about these variables in the `variables.tf` file.
 
 Once that is set up you can plan and apply:
 ```
+cd terraform
 terraform plan
 terraform apply
 ```
