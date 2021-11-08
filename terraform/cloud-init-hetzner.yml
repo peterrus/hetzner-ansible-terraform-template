@@ -13,4 +13,14 @@ write_files:
           - ${floating_ip}/32
 
 runcmd:
-- [ netplan, apply ]
+# Enable floating IP
+- netplan apply
+# Create administrative user without password
+# We will set this later through ansible
+- adduser user --disabled-password --gecos ""
+- usermod -aG sudo user
+# Copy root's authorized_keys so we can auth as 'user' through ssh
+- mkdir /home/user/.ssh
+- cp /root/.ssh/authorized_keys /home/user/.ssh/
+- chown -R user:user /home/user/.ssh
+- chmod -R 700 /home/user/.ssh

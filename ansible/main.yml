@@ -2,4 +2,5 @@
 - name: generic
   hosts: server
   roles:
-    - role: generic
+    - role: apt-update
+    - role: ssh-daemon
