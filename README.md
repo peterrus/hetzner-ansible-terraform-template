@@ -1,3 +1,12 @@
+# Hetzner Ansible Terraform template
+
+What's in the box:
+
+- VPS/compute instance (Ubuntu 20.04) with persistent data volume
+- Floating IP
+- UFW Firewall on by default, only allowing rate limited SSH
+- SSH Daemon with somewhat hardened default settings
+
 # Bootstrap
 
 ## Terraform
@@ -18,7 +27,9 @@ cd ansible
 
 ## Terraform
 
-First create a `terraform/variables.auto.tfvars` file with the following content (adjust as needed):
+*Creates infrastructure*
+
+First create a `terraform/variables.auto.tfvars` file with the following content (adjust as needed, see [`variables.tf`](./terraform/variables.tf)).
 
 ```
 hcloud_token = "redacted"
@@ -28,7 +39,6 @@ server_type = "cx21"
 ssh_keys = ["hetzner_personal"]
 volume_size = "32"
 ```
-You can find more information about these variables in the `variables.tf` file.
 
 Once that is set up you can plan and apply:
 ```
@@ -45,6 +55,9 @@ ssh root@$(terraform output -raw server_ip)
 ```
 
 ## Ansible
+
+*Provisions infrastructure*
+
 ```
 cd ansible
 
@@ -54,8 +67,7 @@ cd ansible
 ssh root@$(terraform -chdir=../terraform output -raw server_ip) passwd user
 
 # Now we run the main playbook which will permanently disable root login through SSH
-# and then run the rest of the playbook (which, in this example, only updates all apt
-# packages and further hardens the SSH daemon).
+# and then run the rest of the playbook.
 ./run.sh
 ```
 

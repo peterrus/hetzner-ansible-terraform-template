@@ -6,7 +6,10 @@
 resource "local_file" "ansible_inventory" {
   content = templatefile("ansible-inventory.yml.tmpl", {
     hosts = tomap({
-      server = hcloud_server.server.ipv4_address
+      server = tomap({
+        ipv4_address = hcloud_server.server.ipv4_address
+        data_volume_path = hcloud_volume.data.linux_device
+      })
     })
   })
   filename = format("%s/%s", abspath(path.root), "../ansible/inventory.yml")

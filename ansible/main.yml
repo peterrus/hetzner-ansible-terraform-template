@@ -4,3 +4,5 @@
   roles:
     - role: apt-update
     - role: ssh-daemon
+    - role: data-volume
+    - role: basic-firewall

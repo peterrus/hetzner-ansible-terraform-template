@@ -1,0 +1,24 @@
+---
+- name: Enable UFW (Firewall) and block everything by default
+  become: yes
+  community.general.ufw:
+    state: enabled
+    policy: deny
+
+- name: Set logging
+  become: yes
+  community.general.ufw:
+    logging: 'on'
+
+- name: Block SSH brute force attempts
+  become: yes
+  community.general.ufw:
+    rule: limit
+    port: ssh
+    proto: tcp
+
+- name: Allow SSH traffic
+  become: yes
+  community.general.ufw:
+    rule: allow
+    name: OpenSSH

@@ -1,7 +1,8 @@
 all:
   hosts:
-%{ for host_key, host_ip in hosts }
-    ${host_key}:
-      ansible_host: ${host_ip}
+%{ for server_name, server_data in hosts }
+    ${server_name}:
+      ansible_host: ${server_data.ipv4_address}
       ansible_user: user
+      data_volume_path: ${server_data.data_volume_path}
 %{~ endfor ~}

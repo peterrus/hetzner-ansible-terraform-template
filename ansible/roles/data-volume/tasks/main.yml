@@ -1,0 +1,9 @@
+---
+- name: Mount data volume
+  become: yes
+  ansible.posix.mount:
+    path: /data
+    src: "{{ data_volume_path }}"
+    fstype: ext4
+    opts: discard
+    state: mounted
