@@ -1,6 +1,8 @@
 ---
 - name: generic
   hosts: server
+  vars_files:
+    - vars/variables.yml
   roles:
     - role: apt-update
     - role: ssh-daemon
