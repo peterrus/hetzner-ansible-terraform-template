@@ -23,6 +23,19 @@ cd ansible
 ./bootstrap.sh # Installs ansible dependencies
 ```
 
+If you wan't to use ansible-vault to store secrets in a local file (which you may, or may not commit to git, depending on your threat model):
+
+```
+# Create a vault, this will open your editor
+# format is the same as all other variable files (like 'vars/variables/yml')
+ansible-vault create secrets.yml.enc
+
+# Optionally edit your vault afterwards
+ansible-vault edit secrets.yml.enc
+```
+
+**By default the `secrets.yml.enc` file is not in `.gitignore`!**
+
 # Running
 
 ## Terraform
@@ -68,6 +81,7 @@ ssh root@$(terraform -chdir=../terraform output -raw server_ip) passwd user
 
 # Now we run the main playbook which will permanently disable root login through SSH
 # and then run the rest of the playbook.
+# This script will automatically unlock your vault when you have one (secrets.yml.enc).
 ./run.sh
 ```
 
